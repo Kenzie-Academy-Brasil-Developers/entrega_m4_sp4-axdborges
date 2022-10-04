@@ -1,22 +1,27 @@
 import { Client } from "pg";
+// import pkg from 'pg';
+// const { Client } = pkg
 
 const database = new Client(
-  process.env.NODE_ENV === "test"
-    ? {
-        user: "",
-        host: "",
-        database: "",
-        password: "",
+//   process.env.NODE_ENV === "test"
+//     ? 
+    {
+        user: "alexandre",
+        host: "localhost",
+        database: "tests_products",
+        password: "505616",
         port: 5432,
       }
-    : {
-        user: process.env.DB_USER,
-        host: process.env.DB_HOST,
-        database: process.env.DB,
-        password: process.env.DB_PASSWORD,
-        port: process.env.DB_PORT,
-      }
+    // : {
+    //     user: process.env.DB_USER,
+    //     host: process.env.DB_HOST,
+    //     database: process.env.DB,
+    //     password: process.env.DB_PASSWORD,
+    //     port: process.env.DB_PORT,
+    //   }
 );
+
+
 
 export const startDatabase = async () => {
   await database.connect();
