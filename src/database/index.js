@@ -1,6 +1,5 @@
-import { Client } from "pg";
-// import pkg from 'pg';
-// const { Client } = pkg
+import pkg from 'pg';
+const { Client } = pkg
 
 const database = new Client(
 //   process.env.NODE_ENV === "test"
