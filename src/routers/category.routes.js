@@ -3,14 +3,16 @@ import { Router } from 'express';
 import {
 	createCategoryController,
 	deleteCategoryController,
-	listCategoriesController,
+	readCategoriesController,
+	updateCategoryController,
 } from '../controllers/categories.controller.js';
+
 const categoryRouter = Router();
 
-categoryRouter.get('', listCategoriesController);
-categoryRouter.get('/:id', listCategoriesController);
+categoryRouter.get('', readCategoriesController);
+categoryRouter.get('/:id', readCategoriesController);
 categoryRouter.post('', createCategoryController);
-
+categoryRouter.patch('/:id', updateCategoryController);
 categoryRouter.delete('/:id', deleteCategoryController);
 
 export default categoryRouter;

@@ -1,22 +1,23 @@
 import {
 	createCategoryService,
 	deleteCategoryService,
-	listCategoriesService,
+	readCategoriesService,
+	readCategoriesServiceById,
 	updateCategoryService,
 } from '../services/categories.service.js';
 
-export const listCategoriesController = async (request, response) => {
+export const readCategoriesController = async (request, response) => {
 	const { id } = request.params;
 
 	try {
 		if (!id) {
-			const list = await listCategoriesService();
-			return response.status(200).json(list);
+			const readCategory = await readCategoriesService();
+			return response.status(200).json(readCategory);
 		}
-		const list = await listCategoriesService(id);
-		return response.status(200).json(list);
+		const readCategory = await readCategoriesServiceById(id);
+		return response.status(200).json(readCategory);
 	} catch (error) {
-		throw new Error(error);
+		return response.status(400).json(error.message)
 	}
 };
 
@@ -27,12 +28,19 @@ export const createCategoryController = async (request, response) => {
 		const createdCategory = await createCategoryService(name);
 		return response.status(201).json(createdCategory);
 	} catch (error) {
-		return response.status(400).json(error);
+		return response.status(400).json(error.message);
 	}
 };
 
 export const updateCategoryController = async (request, response) => {
-	const updatedCategory = await updateCategoryService();
+	const { name } = request.body;
+	const { id } = request.params;
+	try {
+		const updatedCategory = await updateCategoryService(name, id);
+		return response.status(200).json(updatedCategory);
+	} catch (error) {
+		return response.status(404).json(error.message);
+	}
 };
 
 export const deleteCategoryController = async (request, response) => {
@@ -40,8 +48,8 @@ export const deleteCategoryController = async (request, response) => {
 
 	try {
 		const deletedCategory = await deleteCategoryService(id);
-		return response.status(200).json(deletedCategory)
+		return response.status(200).json(deletedCategory);
 	} catch (error) {
-		throw new Error(response.status(403).json("not deleted"))
+		return response.status(403).json(error.message);
 	}
 };

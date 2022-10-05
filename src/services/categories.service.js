@@ -1,33 +1,36 @@
 import database from '../database/index.js';
 
-export const listCategoriesService = async (id) => {
-	if (!id) {
-		try {
-			const res = await database.query(
-				`SELECT 
-                    *
-                FROM categories
-            ;`,
-			);
-			return res.rows;
-		} catch (error) {
-			throw new Error(error);
-		}
-	} else {
-		try {
-			const res = await database.query(
-				`SELECT 
-                    *
-                FROM categories
-                WHERE categories.id = $1
-            ;`,
-				[id],
-			);
-			return res.rows[0];
-		} catch (error) {
-			throw new Error(error);
-		}
-	}
+export const readCategoriesService = async () => {
+
+    try {
+        const res = await database.query(
+            `SELECT 
+                *
+            FROM categories
+        ;`,
+        );
+        return res.rows;
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
+export const readCategoriesServiceById = async (id) => {
+
+    try {
+        const res = await database.query(
+            `SELECT 
+                *
+            FROM categories
+            WHERE categories.id = $1
+        ;`,
+            [id],
+        );
+        return res.rows[0];
+    } catch (error) {
+        throw new Error(error);
+    }
+
 };
 
 export const createCategoryService = async (name) => {
@@ -52,7 +55,27 @@ export const createCategoryService = async (name) => {
 }
 
 export const updateCategoryService = async (name, id) => {
-    console.log( name, id)
+    try {
+        const res = await database.query(
+            `UPDATE
+                categories
+            SET 
+                name = $1
+            WHERE 
+                categories.id = $2  
+            RETURNING *
+        ;`,
+        [name, id]
+        );
+
+        const updated = {
+            message: 'category updated',
+            category: res.rows[0]
+        }
+        return updated;
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
 export const deleteCategoryService = async (id) => {
