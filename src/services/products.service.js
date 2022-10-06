@@ -8,6 +8,7 @@ export const readProductsService = async () => {
             FROM products
         ;`,
 		);
+    
 		return res.rows;
 	} catch (error) {
 		throw new Error(error);
@@ -146,7 +147,7 @@ export const readProductsByCategoryService = async (reqId) => {
             ;`,
 			[reqId],
 		);
-		return res.rows[0];
+		return [{category: res.rows[0]}];
 	} catch (error) {
 		throw new Error(error);
 	}

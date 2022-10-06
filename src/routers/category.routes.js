@@ -12,7 +12,7 @@ const categoryRouter = Router();
 
 categoryRouter.get('', readCategoriesController);
 categoryRouter.get('/:id', readCategoriesController);
-categoryRouter.post('', createCategoryController);
+categoryRouter.post('', verifyNameAlreadyExistsMiddleware,createCategoryController);
 categoryRouter.patch('/:id', updateCategoryController);
 categoryRouter.delete('/:id', deleteCategoryController);
 

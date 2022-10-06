@@ -16,9 +16,11 @@ export const verifyNameAlreadyExistsMiddleware = async (
         ;`
     )
 
-    if(res.rows[0].name === name) {
-        return response.status(400).json('This category already exists')
-    }
+    res.rows.forEach(element => {
+        if(element.name === name) {
+            return response.status(400).json({ message: 'This category already exists'});
+        }
+    });
 
 	next();
 };

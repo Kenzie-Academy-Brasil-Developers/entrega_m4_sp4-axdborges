@@ -4,14 +4,11 @@ export const verifyNameAndPriceMiddleware = (
 	next,
 ) => {
 	const { name, price } = request.body;
-
-   console.log(request.body)
-
 	if (!name) {
-		return response.status(400).json('Request without name');
+		return response.status(400).json({ message: 'Request without name'});
 	}
 	if (!price) {
-		return response.status(400).json('Request without price');
+		return response.status(400).json({ message: 'Request without price'});
 	}
 
 	next();

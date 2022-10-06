@@ -46,7 +46,7 @@ export const deleteProductController = async (request, response) => {
 
 	try {
 		const deletedProduct = await deleteProductService(id);
-		return response.status(200).json(deletedProduct);
+		return response.status(204).json(deletedProduct);
 	} catch (error) {
 		return response.status(403).json(error.message);
 	}

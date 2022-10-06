@@ -12,7 +12,7 @@ const productRouter = Router();
 
 productRouter.get('', readProductsController);
 productRouter.get('/:id', readProductsController);
-productRouter.post('', createProductController);
+productRouter.post('', verifyNameAndPriceMiddleware,createProductController);
 productRouter.patch('/:id', updateProductController);
 productRouter.delete('/:id', deleteProductController);
 productRouter.get('/categories', readProductsByCategoryController);
