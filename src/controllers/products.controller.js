@@ -22,10 +22,10 @@ export const readProductsController = async (request, response) => {
 };
 
 export const createProductController = async (request, response) => {
-    const { name, price, categoryId } = request.body
+    const { name, price, category_id } = request.body
 	try {
-		const createdProduct = await createProductService(name, price, categoryId);
-		return response.status(201).json(createdProduct);
+		const createdProduct = await createProductService(name, price, category_id);
+		return response.status(201).json({message: 'Product Created' , product: createdProduct});
 	} catch (error) {
 		return response.status(400).json(error.message);
 	}

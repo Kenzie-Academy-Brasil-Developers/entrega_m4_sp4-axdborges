@@ -41,10 +41,6 @@ export const createProductService = async (nome, price, categoryId) => {
         ;`,
 			[nome, price, categoryId],
 		);
-		const created = {
-			message: 'product created',
-			product: res.rows[0],
-		};
 		return res.rows[0];
 	} catch (error) {
 		throw new Error(error);
