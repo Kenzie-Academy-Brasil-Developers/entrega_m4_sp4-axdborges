@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS Categorias(
+CREATE TABLE IF NOT EXISTS Categories(
   id BIGSERIAL PRIMARY KEY UNIQUE,
   name VARCHAR(200) NOT NULL UNIQUE
 );
@@ -8,5 +8,5 @@ CREATE TABLE IF NOT EXISTS Products(
   name VARCHAR(200) NOT NULL,
   price DECIMAL(8, 2) NOT NULL,
   category_id INTEGER NOT NULL, 
-  FOREIGN KEY (category_id) REFERENCES Categorias(id)
+  FOREIGN KEY (category_id) REFERENCES Categories(id)
 );
