@@ -1,5 +1,3 @@
-
-import productRouter from '../routers/products.routes.js';
 import {
 	createProductService,
 	deleteProductService,
@@ -24,8 +22,9 @@ export const readProductsController = async (request, response) => {
 };
 
 export const createProductController = async (request, response) => {
+    const { name, price, categoryId } = request.body
 	try {
-		const createdProduct = await createProductService(request.body);
+		const createdProduct = await createProductService(name, price, categoryId);
 		return response.status(201).json(createdProduct);
 	} catch (error) {
 		return response.status(400).json(error.message);
@@ -38,7 +37,7 @@ export const updateProductController = async (request, response) => {
 		const updatedProduct = await updateProductService(request.body, id);
 		return response.status(200).json(updatedProduct);
 	} catch (error) {
-		return response.status(404).json(error.message);
+		return response.status(400).json(error.message);
 	}
 };
 

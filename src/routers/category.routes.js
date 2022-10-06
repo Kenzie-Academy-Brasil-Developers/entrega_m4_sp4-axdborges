@@ -6,6 +6,7 @@ import {
 	readCategoriesController,
 	updateCategoryController,
 } from '../controllers/categories.controller.js';
+import { verifyNameAlreadyExistsMiddleware } from '../middlewares/verifyNameAlreadyExists.middleware.js';
 
 const categoryRouter = Router();
 

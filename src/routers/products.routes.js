@@ -6,6 +6,8 @@ import { readProductsController } from '../controllers/products.controller.js';
 import { updateProductController } from '../controllers/products.controller.js';
 import { deleteProductController } from '../controllers/products.controller.js';
 
+import { verifyNameAndPriceMiddleware } from '../middlewares/verifyNameAndPrice.middleware.js';
+
 const productRouter = Router();
 
 productRouter.get('', readProductsController);

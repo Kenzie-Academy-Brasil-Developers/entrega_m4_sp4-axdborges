@@ -30,16 +30,16 @@ export const readProductsServiceById = async (id) => {
 	}
 };
 
-export const createProductService = async (product) => {
+export const createProductService = async (nome, price, categoryId) => {
 	try {
 		const res = await database.query(
-			`INSERT INTO 
+		`INSERT INTO 
             products (name, price, category_id)
         VALUES 
             ($1, $2, $3)  
         RETURNING *
         ;`,
-			[product.name, product.price, product.categoryId],
+			[nome, price, categoryId],
 		);
 		const created = {
 			message: 'product created',

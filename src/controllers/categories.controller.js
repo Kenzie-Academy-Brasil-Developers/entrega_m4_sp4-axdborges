@@ -48,7 +48,7 @@ export const deleteCategoryController = async (request, response) => {
 
 	try {
 		const deletedCategory = await deleteCategoryService(id);
-		return response.status(200).json(deletedCategory);
+		return response.status(204).json(deletedCategory);
 	} catch (error) {
 		return response.status(403).json(error.message);
 	}
