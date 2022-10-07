@@ -33,6 +33,9 @@ export const readProductsServiceById = async (id) => {
 
 export const createProductService = async (nome, price, categoryId) => {
 	try {
+        if(!nome || !price){
+            throw new Error('Without name or price')
+        }
 		const res = await database.query(
 		`INSERT INTO 
             products (name, price, category_id)
@@ -44,7 +47,7 @@ export const createProductService = async (nome, price, categoryId) => {
 		);
 		return res.rows[0];
 	} catch (error) {
-		throw new Error(error);
+		throw new Error(error.message);
 	}
 };
 

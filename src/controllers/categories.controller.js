@@ -26,9 +26,9 @@ export const createCategoryController = async (request, response) => {
 
 	try {
 		const createdCategory = await createCategoryService(name);
-		return response.status(201).json(createdCategory);
+		return response.status(201).json({ message: 'category created', category: createdCategory});
 	} catch (error) {
-		return response.status(400).json(error.message);
+		return response.status(400).json({ message: error.message });
 	}
 };
 

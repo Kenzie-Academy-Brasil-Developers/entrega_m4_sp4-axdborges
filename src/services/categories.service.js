@@ -35,6 +35,16 @@ export const readCategoriesServiceById = async (id) => {
 
 export const createCategoryService = async (name) => {
     try {
+        if(!name){
+            throw new Error("Without category name")
+        }
+        const findCategory = await database.query("SELECT * FROM categories WHERE name = $1", [
+            name,
+          ]);
+      
+          if (findCategory.rows.length > 0) {
+            throw new Error('Category already exists');
+          }
         const res = await database.query(
             `INSERT INTO 
                 categories (name)
@@ -44,13 +54,9 @@ export const createCategoryService = async (name) => {
         ;`,
         [name]
         );
-        const created = {
-            message: 'category created',
-            category: res.rows[0]
-        }
-        return created;
+        return res.rows[0];
     } catch (error) {
-        throw new Error(error);
+        throw new Error(error.message);
     }
 }
 

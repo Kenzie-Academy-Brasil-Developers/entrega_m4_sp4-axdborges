@@ -30,8 +30,7 @@ export const createProductController = async (request, response) => {
 			.status(201)
 			.json({ message: 'Product Created', product: createdProduct });
 	} catch (error) {
-		
-		return response.status(400).json(error.message);
+		return response.status(400).json({ message: error.message });
 	}
 };
 

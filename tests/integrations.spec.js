@@ -149,6 +149,7 @@ describe("Testando casos de erro nas rotas /categories e /products", () => {
     testProduct.category_id = successResponse.body.category.id;
 
     expect(errorResponse.status).toBe(400);
+    // console.log(errorRes);
     expect(errorResponse.body.message).toBeDefined();
   });
 
