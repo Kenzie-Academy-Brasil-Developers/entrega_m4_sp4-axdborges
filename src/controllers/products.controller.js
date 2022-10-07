@@ -4,7 +4,7 @@ import {
 	readProductsService,
 	updateProductService,
 	readProductsByCategoryService,
-    readProductsServiceById,
+	readProductsServiceById,
 } from '../services/products.service.js';
 
 export const readProductsController = async (request, response) => {
@@ -17,16 +17,20 @@ export const readProductsController = async (request, response) => {
 		const read = await readProductsServiceById(id);
 		return response.status(200).json(read);
 	} catch (error) {
-		return response.status(400).json(error.message);
+		return response.status(400).json({ message: error.message });
 	}
 };
 
 export const createProductController = async (request, response) => {
-    const { name, price, category_id } = request.body
+	const { name, price, category_id } = request.body;
+    
 	try {
 		const createdProduct = await createProductService(name, price, category_id);
-		return response.status(201).json({message: 'Product Created' , product: createdProduct});
+		return response
+			.status(201)
+			.json({ message: 'Product Created', product: createdProduct });
 	} catch (error) {
+		
 		return response.status(400).json(error.message);
 	}
 };
@@ -37,7 +41,7 @@ export const updateProductController = async (request, response) => {
 		const updatedProduct = await updateProductService(request.body, id);
 		return response.status(200).json(updatedProduct);
 	} catch (error) {
-		return response.status(400).json(error.message);
+		return response.status(400).json({ message: error.message });
 	}
 };
 
@@ -48,7 +52,7 @@ export const deleteProductController = async (request, response) => {
 		const deletedProduct = await deleteProductService(id);
 		return response.status(204).json(deletedProduct);
 	} catch (error) {
-		return response.status(403).json(error.message);
+		return response.status(400).json({ message: error.message });
 	}
 };
 

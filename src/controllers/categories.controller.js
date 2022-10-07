@@ -17,7 +17,7 @@ export const readCategoriesController = async (request, response) => {
 		const readCategory = await readCategoriesServiceById(id);
 		return response.status(200).json(readCategory);
 	} catch (error) {
-		return response.status(400).json(error.message)
+		return response.status(400).json({ message: error.message });
 	}
 };
 
@@ -39,7 +39,7 @@ export const updateCategoryController = async (request, response) => {
 		const updatedCategory = await updateCategoryService(name, id);
 		return response.status(200).json(updatedCategory);
 	} catch (error) {
-		return response.status(404).json(error.message);
+		return response.status(400).json({ message: error.message });
 	}
 };
 
@@ -50,6 +50,6 @@ export const deleteCategoryController = async (request, response) => {
 		const deletedCategory = await deleteCategoryService(id);
 		return response.status(204).json(deletedCategory);
 	} catch (error) {
-		return response.status(403).json(error.message);
+		return response.status(400).json({ message: error.message });
 	}
 };
